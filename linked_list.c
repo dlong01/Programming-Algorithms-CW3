@@ -1,13 +1,20 @@
 #include "linked_list.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 /* create a new node */
 /* returns a pointer to the newly created node */
 /* print an error message and return NULL if an error occurs */
 Node *initialise_node(void)
 {
-        Node *new_node;
-        new_node.prev = *(new_node - sizeof(Node));
-        new_node.next = *(new_node + sizeof(Node));
+        struct Node *new_node;
+        (*new_node).prev = (Node *)((&new_node - sizeof(Node)));
+        (*new_node).next = (Node *)((&new_node + sizeof(Node)));
+        
+        if (new_node == NULL)  {
+                fprintf(stderr, "Unable to create new node\n");
+                return NULL;
+        }
         
         return new_node;
 }
@@ -16,6 +23,11 @@ Node *initialise_node(void)
 /* print an error message and return if node is NULL */
 void free_node(Node *node)
 {
+        node = (Node *)malloc(sizeof(Node));
+        
+        if (node == NULL)  {
+                fprintf(stderr, "Unable to free node");
+        }
 }
 
 /* create a new linked list */
