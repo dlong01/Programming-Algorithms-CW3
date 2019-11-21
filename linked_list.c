@@ -199,7 +199,7 @@ void print_linked_list(LinkedList *list, void (*print_func)(void *))
         
         node = list->head;
         
-        while (node->next != NULL)  {
+        while (node != NULL)  {
                 print_func(node->data);
                 node = node->next;
         }
