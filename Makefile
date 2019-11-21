@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Wall -ansi -pedantic-errors
+CFLAGS=-Wall -ansi -pedantic-errors -g
 CLIBS=
 
 TEST_ENTRIES_1=this is a fairly short test string.

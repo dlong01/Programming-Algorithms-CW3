@@ -8,8 +8,8 @@
 Node *initialise_node(void)
 {
         struct Node *new_node;
-        
         new_node = (Node *)malloc(sizeof(Node));
+        fprintf(stderr, "aNode\n");
         
         if (new_node == NULL)  {
                 fprintf(stderr, "Unable to create new node\n");
@@ -32,12 +32,13 @@ void free_node(Node *node)
                 return;
         }
         
+
         if (node->prev != NULL) 
                 node->prev->next = node->next;
         if (node->next != NULL)        
                 node->next->prev = node->prev;
-
         free(node);
+        fprintf(stderr, "fNode\n");
         
 }
 
@@ -48,6 +49,7 @@ LinkedList *initialise_linked_list(void)
 {
         struct LinkedList *list;
         list = (LinkedList *)malloc(sizeof(LinkedList));
+        fprintf(stderr, "alist\n");
 
         if (list == NULL)  {
                 fprintf(stderr, "Unable to initialise linked list\n");
@@ -70,10 +72,11 @@ void free_linked_list(LinkedList *list)
                 return;
         }
 
-        while (list->head != NULL)  {
+        while (list->tail != NULL)  {
                 remove_tail_linked_list(list);
         }
         free(list);
+        fprintf(stderr, "flist\n");
 }
 
 /* create and add node to the tail of linked list *list */
@@ -157,6 +160,7 @@ void remove_head_linked_list(LinkedList *list)
                 list->head = node;
                 node->prev = NULL;
         }
+
 }
 
 /* remove tail from linked list *list */
