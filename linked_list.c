@@ -98,8 +98,8 @@ void remove_tail_linked_list(LinkedList *list)
         }
         
         list->tail = list->tail->prev;
-        free(list->tail->next)
-        list->tail->next = NULL
+        free(list->tail->next);
+        list->tail->next = NULL;
 }
 
 /* print data stored in linked list *list to stdout */
