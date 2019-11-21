@@ -5,9 +5,11 @@
 /* print an error message and return NULL if an error occurs */
 Node *initialise_node(void)
 {
-        Node *new_node = {void, *(node - sizeof(Node)), *(node + sizeof(Node))}
+        Node *new_node;
+        new_node.prev = *(new_node - sizeof(Node));
+        new_node.next = *(new_node + sizeof(Node));
         
-        return new_node
+        return new_node;
 }
 
 /* free memory for node *node */
