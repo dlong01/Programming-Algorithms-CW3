@@ -8,8 +8,10 @@
 Node *initialise_node(void)
 {
         struct Node *new_node;
-        (*new_node).prev = (Node *)((&new_node - sizeof(Node)));
-        (*new_node).next = (Node *)((&new_node + sizeof(Node)));
+        new_node = (Node *)malloc(sizeof(Node));
+        
+        new_node->prev = NULL;
+        new_node->next = NULL;
         
         if (new_node == NULL)  {
                 fprintf(stderr, "Unable to create new node\n");
@@ -23,11 +25,12 @@ Node *initialise_node(void)
 /* print an error message and return if node is NULL */
 void free_node(Node *node)
 {
-        node = (Node *)malloc(sizeof(Node));
-        
         if (node == NULL)  {
-                fprintf(stderr, "Unable to free node");
+                fprintf(stderr, "Unable to free node\n");
         }
+
+        free(node);
+        
 }
 
 /* create a new linked list */
@@ -35,6 +38,18 @@ void free_node(Node *node)
 /* print an error message and return NULL if an error occurs */
 LinkedList *initialise_linked_list(void)
 {
+        struct LinkedList *list;
+        list = (LinkedList *)malloc(sizeof(LinkedList);
+        
+        list->head = NULL;
+        list->tail = NULL;
+        
+        if (list == NULL)  {
+                fprintf(stderr, "Unable to initialise linked list\n");
+                return NULL;
+        }
+        
+        return list;
 }
 
 /* free memory for linked list *list */
@@ -42,6 +57,12 @@ LinkedList *initialise_linked_list(void)
 /* print an error message and return if list is NULL */
 void free_linked_list(LinkedList *list)
 {
+        if (list == NULL)  {
+                fprintf(stderr, "Unable to free list\n");
+        }
+
+        for (
+        free(list);
 }
 
 /* create and add node to the tail of linked list *list */
@@ -50,6 +71,7 @@ void free_linked_list(LinkedList *list)
 /* should return NULL if an error occurs */
 Node *append_linked_list(LinkedList *list, void *data)
 {
+        
 }
 
 /* create and add node to the head of linked list *list */
@@ -69,7 +91,15 @@ void remove_head_linked_list(LinkedList *list)
 /* remove tail from linked list *list */
 /* print an error message and return if list is NULL or empty */
 void remove_tail_linked_list(LinkedList *list)
-{
+{       
+        if (list == NULL)  {
+                fprintf(stderr, "Unable to remove tail from empty linked list\n");
+                return;
+        }
+        
+        list->tail = list->tail->prev;
+        free(list->tail->next)
+        list->tail->next = NULL
 }
 
 /* print data stored in linked list *list to stdout */
