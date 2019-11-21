@@ -44,7 +44,6 @@ int main(int argc, char **argv)
 	/* add all entries to list */
 	for(i = 1; i < argc; i++) {
 		append_linked_list(list, (void *) argv[i]);
-                printf("add\n");
 	}
 
 	/* remove all entries from list */
@@ -55,7 +54,6 @@ int main(int argc, char **argv)
 	/* add all entries to list */
 	for(i = 1; i < argc; i++) {
 		append_linked_list(list, (void *) argv[i]);
-                printf("add\n");
 	}
 
 	/* remove all entries from list */
@@ -75,13 +73,9 @@ int main(int argc, char **argv)
 	/* add all entries three times to list */
 	for(i = 1; i < argc; i++) {
 		append_linked_list(list, (void *) argv[i]);
-                printf("add\n");
 		append_linked_list(list, (void *) argv[i]);
-		printf("add\n");
-                append_linked_list(list, (void *) argv[i]);
-                printf("add\n");
-                
-        }
+		append_linked_list(list, (void *) argv[i]);
+	}
 
 	/* remove head and tail a few times */
 	for(i = 1; i < argc; i++) {
