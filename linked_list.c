@@ -202,7 +202,7 @@ void print_linked_list(LinkedList *list, void (*print_func)(void *))
 {
         Node *node;
         
-        if (list == NULL || print_func == NULL)  {
+        if (list == NULL)  {
                 fprintf(stderr, "Unable to print linked list\n");
                 return;
         }
@@ -244,5 +244,5 @@ void print_string(void *ptr)
 {
         char *str_ptr;
         str_ptr = (char *)ptr;
-        printf("%s\n", (char *)ptr);
+        printf("%s\n", str_ptr);
 }
