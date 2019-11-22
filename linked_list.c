@@ -32,10 +32,7 @@ void free_node(Node *node)
         }
         
 
-        if (node->prev != NULL) 
-                node->prev->next = node->next;
-        if (node->next != NULL)        
-                node->next->prev = node->prev;
+
         free(node);
         
 }
@@ -73,6 +70,7 @@ void free_linked_list(LinkedList *list)
                 remove_tail_linked_list(list);
         }
         free(list);
+        
 }
 
 /* create and add node to the tail of linked list *list */
@@ -82,9 +80,15 @@ void free_linked_list(LinkedList *list)
 Node *append_linked_list(LinkedList *list, void *data)
 {
         Node *prev_tail;
-        Node *new_node = initialise_node();
+        Node *new_node;
         
-        if (new_node == NULL || list == NULL)  {
+        if (list == NULL)  {
+                fprintf(stderr, "Unable to append node to linked list\n");
+                return NULL;
+        }
+        new_node = initialise_node();
+        
+        if (new_node == NULL)  {
                 fprintf(stderr, "Unable to append node to linked list\n");
                 return NULL;
         }
@@ -112,13 +116,19 @@ Node *append_linked_list(LinkedList *list, void *data)
 Node *prepend_linked_list(LinkedList *list, void *data)
 {
         Node *prev_head;
-        Node *new_node = initialise_node();
+        Node *new_node;
         
-        if (new_node == NULL || list == NULL)  {
+        if (list == NULL)  {
                 fprintf(stderr, "Unable to append node to linked list\n");
                 return NULL;
         }
         
+        new_node = initialise_node();
+        
+        if (new_node == NULL)  {
+                fprintf(stderr, "Unable to append node to linked list\n");
+                return NULL;
+        }
         prev_head = list->head;
         
         if (list->head == NULL)  {
