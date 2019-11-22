@@ -22,7 +22,14 @@ void free_queue(Queue *queue)
                 fprintf(stderr, "Unable to free queue\n");
                 return;
         }
-        free_linked_list(queue);
+        while (queue->head != NULL) {
+                if (queue->head->data != NULL) {
+                        free(queue->head->data);
+                }
+                pop_queue(queue);
+        }
+        
+        free(queue);
 }
 
 /* remove entry from queue *queue */
@@ -32,6 +39,8 @@ void free_queue(Queue *queue)
 void *pop_queue(Queue *queue)
 {
         void *stored_data;
+        Node *head;
+        
         if (queue == NULL || queue->head == NULL)  {
                 fprintf(stderr, "Unable to pop from empty queue\n");
                 return NULL;
@@ -63,18 +72,12 @@ Node *push_queue(Queue *queue, void *data, size_t data_size)
                 fprintf(stderr, "Unable to add entry\n");
                 return NULL;
         }
-        
+
         tail = append_linked_list(queue, data);
         
         tail->data = (Node *)malloc(data_size);
         
-        if (tail->data == NULL) {
-                fprintf(stderr, "Unable to add entry\n");
-                return NULL;
-        }
         return tail;
-        
-        
 }
 
 /* return pointer to data at start of queue *queue */
@@ -99,5 +102,19 @@ void *peek_queue(Queue *queue)
 /* don't print anything if the queue is empty */
 void print_queue(Queue *queue, void (*print_func)(void *))
 {
-        print_linked_list(queue, (*print_func));
+        Node *node;
+        
+        if (queue == NULL || print_func == NULL)  {
+                fprintf(stderr, "Unable to print linked list\n");
+                return;
+        }
+        
+        node = queue->tail;
+        
+        while (node != NULL)  {
+                if (node->data != NULL) {                
+                        print_func(node->data);
+                        node = node->next;
+                }
+        }
 }

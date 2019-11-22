@@ -19,10 +19,17 @@ Stack *initialise_stack(void)
 void free_stack(Stack *stack)
 {
         if (stack == NULL)  {
-                fprintf(stderr, "Unable to free stack\n");
+                fprintf(stderr, "Unable to free queue\n");
                 return;
         }
-        free_linked_list(stack);
+        while (stack->tail != NULL) {
+                if (stack->tail->data != NULL) {
+                        free(stack->tail->data);
+                }
+                pop_stack(stack);
+        }
+        
+        free(stack);
 }
 
 /* remove entry from stack *stack */
@@ -32,14 +39,15 @@ void free_stack(Stack *stack)
 void *pop_stack(Stack *stack)
 {
         void *stored_data;
-        if (stack == NULL)  {
-                fprintf(stderr, "Unable to pop from empty stack\n");
+        Node *tail;
+        
+        if (stack == NULL || stack->tail == NULL)  {
+                fprintf(stderr, "Unable to pop from empty queue\n");
                 return NULL;
         }
-        stored_data = stack->head->data;
+        stored_data = stack->tail->data;
  
-        remove_head_linked_list(stack);
-        
+        remove_tail_linked_list(stack);
         
         return stored_data;
 }
@@ -52,7 +60,7 @@ void *pop_stack(Stack *stack)
 /* or if data is NULL */
 Node *push_stack(Stack *stack, void *data, size_t data_size)
 {
-        struct Node *head;
+        struct Node *tail;
  
         if (data == NULL)  {
                 fprintf(stderr, "Unable to add entry with empty data\n");
@@ -64,17 +72,11 @@ Node *push_stack(Stack *stack, void *data, size_t data_size)
                 return NULL;
         }
         
-        head = append_linked_list(stack, data);
+        tail = append_linked_list(stack, data);
         
-        head->data = (Node *)malloc(data_size);
+        tail->data = (Node *)malloc(data_size);
         
-        if (head->data == NULL) {
-                fprintf(stderr, "Unable to add entry\n");
-                return NULL;
-        }
-        return head;
-        
-        
+        return tail;
 }
 
 /* return pointer to data at start of stack *stack */
@@ -87,7 +89,7 @@ void *peek_stack(Stack *stack)
                 return NULL;
         }
         
-        data = stack->head->data;
+        data = stack->tail->data;
         return data;
 }
 
@@ -99,5 +101,19 @@ void *peek_stack(Stack *stack)
 /* don't print anything if the stack is empty */
 void print_stack(Stack *stack, void (*print_func)(void *))
 {
-        print_linked_list(stack, (*print_func));
+        Node *node;
+        
+        if (stack == NULL || print_func == NULL)  {
+                fprintf(stderr, "Unable to print linked list\n");
+                return;
+        }
+        
+        node = stack->tail;
+        
+        while (node != NULL)  {
+                if (node->data != NULL) {
+                        print_func(node->data);
+                        node = node->prev;
+                }
+        }
 }
