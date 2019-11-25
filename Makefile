@@ -35,7 +35,7 @@ task2_test_run: task2_test
 	./task2_test $(TEST_ENTRIES_1)
 
 task2_test_memcheck: task2_test
-	valgrind --tool=memcheck --leak-check=yes --show-reachable=yes --track-origins=yes ./task2_test $(TEST_ENTRIES_1)
+	valgrind --tool=memcheck --leak-check=yes --show-reachable=yes ./task2_test $(TEST_ENTRIES_1)
 
 clean:
 	rm -f task1_test task2_test *.o
