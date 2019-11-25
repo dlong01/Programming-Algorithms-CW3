@@ -39,7 +39,6 @@ void free_queue(Queue *queue)
 void *pop_queue(Queue *queue)
 {
         void *stored_data;
-        Node *head;
         
         if (queue == NULL || queue->head == NULL)  {
                 fprintf(stderr, "Unable to pop from empty queue\n");

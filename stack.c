@@ -39,7 +39,6 @@ void free_stack(Stack *stack)
 void *pop_stack(Stack *stack)
 {
         void *stored_data;
-        Node *tail;
         
         if (stack == NULL || stack->tail == NULL)  {
                 fprintf(stderr, "Unable to pop from empty queue\n");
