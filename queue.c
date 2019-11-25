@@ -109,7 +109,7 @@ void print_queue(Queue *queue, void (*print_func)(void *))
                 return;
         }
         
-        node = queue->tail;
+        node = queue->head;
         
         while (node != NULL)  {
                 if (node->data != NULL) {                
