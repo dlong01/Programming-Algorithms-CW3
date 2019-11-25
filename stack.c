@@ -1,6 +1,7 @@
 #include "stack.h"
 #include "linked_list.h"
 #include <stdio.h>
+#include <string.h>
 
 /* create a new stack */
 /* returns a pointer to the newly created stack */
