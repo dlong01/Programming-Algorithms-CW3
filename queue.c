@@ -1,6 +1,7 @@
 #include "queue.h"
 #include "linked_list.h"
 #include <stdio.h>
+#include <string.h>
 
 /* create a new queue */
 /* returns a pointer to the newly created queue */
@@ -74,7 +75,9 @@ Node *push_queue(Queue *queue, void *data, size_t data_size)
 
         tail = append_linked_list(queue, data);
         
-        tail->data = (Node *)malloc(data_size);
+        tail->data = malloc(data_size);
+        memcpy(tail->data, data, data_size);
+
         
         return tail;
 }

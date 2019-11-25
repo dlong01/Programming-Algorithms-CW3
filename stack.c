@@ -73,7 +73,8 @@ Node *push_stack(Stack *stack, void *data, size_t data_size)
         
         tail = append_linked_list(stack, data);
         
-        tail->data = (Node *)malloc(data_size);
+        tail->data = malloc(data_size);
+        memcpy(tail->data, data, data_size);
         
         return tail;
 }
